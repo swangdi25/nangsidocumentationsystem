@@ -73,8 +73,8 @@ return [
 =======
    	 	'driver' => 'sftp',
    		 'host' => '172.30.3.95',
-   		 'username' => 'sftpmohca',
-   		 'password' => 'mohca@ict$20',
+   		 'username' => '',
+   		 'password' => '',
 >>>>>>> swangdi
 		],
 
