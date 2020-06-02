@@ -65,10 +65,10 @@ return [
         ],
 
 	'sftp' => [
-   	 	'driver' => '',
-   		 'host' => '',
-   		 'username' => '',
-   		 'password' => '',
+   	 	'driver' => 'sftp',
+   		 'host' => '172.30.3.95',
+   		 'username' => 'sftpmohca',
+   		 'password' => 'mohca@ict$20',
 		],
 
     ],
