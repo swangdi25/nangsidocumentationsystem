@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use App\Agency;
 use App\Mail\SendMailable;
+use DB;
+
 
 
 class RegisterController extends Controller
@@ -55,7 +57,7 @@ class RegisterController extends Controller
             'designation' => ['required', 'string', 'max:100'],
             'department' => ['required', 'string', 'max:100'],
             'mphone' => ['required', 'string', 'max:15'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:tbl_users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],          
         ]);
     }
@@ -68,30 +70,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-   
-    //     $fileName = 'null';
-
-    //    // $request = app('request');
-
-    //    $fileName = time() . '.' . $data['profile_pic']->getClientOriginalExtension();
-
-    //    $data['profile_pic']->move(base_path() . '/public/profile/', $fileName);
-
-        // if ($data['profile_pic']->hasfile('profile_pic')) {
-        //     $destinationPath = public_path('public/profile');
-        //     $extension = $data['profile_pic']->file('profile_pic')->getClientOriginalExtension();
-        //     $fileName = uniqid().'.'.$extension;
-    
-        //     $data['profile_pic']->file('profile_pic')->move($destinationPath, $fileName);
-        // }
-       
+        
         $user = User::create([
             'name' => $data['name'],
             'cid' => $data['cid'],
             'eid' => $data['eid'],
             'designation' => $data['designation'],
-            'department_id' => $data['department'],
+            'agency_id' => $data['department'],
             'division_id' => $data['division'],
+            'role_id' => $data['role'],
             'phone' => $data['mphone'],
             'officephone' => $data['officephone'],
             'email' => $data['email'],
@@ -112,6 +99,8 @@ class RegisterController extends Controller
 public function showRegistrationForm()
 {
     $agencies = Agency::all();
-    return view('auth.register', compact('agencies'));
+    $roles = DB::table('tbl_roles')->select('id','Role')->get();
+
+    return view('auth.register', compact('agencies','roles'));
 }
 }

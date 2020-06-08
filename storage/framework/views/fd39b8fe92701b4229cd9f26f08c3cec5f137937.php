@@ -72,7 +72,7 @@ unset($__errorArgs, $__bag); ?>" name="designation" value="<?php echo e(old('des
                         <div class="form-group row">
                             <label for="department" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Agency')); ?></label>
                             <div class="col-md-6">
-                                <select name="department" id="department" onchange="finddivisions(this.value)" required>
+                                <select name="department" id="department">
                                 <option value="">Please select...</option>
                                  <?php $__currentLoopData = $agencies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $agency): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                  <option value="<?php echo e($agency->id); ?>"><?php echo e($agency->name); ?></option>
@@ -95,18 +95,22 @@ unset($__errorArgs, $__bag); ?>" name="department" value="<?php echo e(old('depa
                             <div class="col-md-6">
                                 <select name="division" id="divisionid">
                                     <option value="">Select Division</option>                             
-                                </select>
-                                <!-- <input id="division" type="text" class="form-control <?php $__errorArgs = ['division'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="division" value="<?php echo e(old('division')); ?>" required autocomplete="division" autofocus> -->
+                                </select>            
 
                             </div>  
-                        </div>                        
+                        </div>      
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Role')); ?></label>
+
+                            <div class="col-md-6">
+                                <select name="role" id="role">
+                                    <option value="">Select Role</option>   
+                                    <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>       
+                                    <option value="<?php echo e($role->id); ?>"><?php echo e($role->Role); ?></option>  
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                   
+                                </select>            
+                            </div>  
+                        </div>                      
                       
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right"><?php echo e(__('E-Mail Address')); ?></label>
@@ -187,8 +191,25 @@ unset($__errorArgs, $__bag); ?>" name="password" required onfocusout="pwdMatchin
         </div>
     </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+    $('#department').on('change',function(e){
+        var id = e.target.value;
+        $.get('/get-divisions?agencyId='+id,function(data){
+            console.log(data);
+            $('#divisionid').empty();
+            $('#divisionid').append('<option disabled value="">Select Division</option>');
+            $.each(data,function(index,divObj){
+                $('#divisionid').append('<option value="'+divObj.id+'">'+divObj.division+'</option>');
+            })
+
+        });
+    });
+
+    
+})
+
 function finddivisions(agencyid) {
   
   var xmlhttp = new XMLHttpRequest();

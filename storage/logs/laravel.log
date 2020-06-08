@@ -568,9 +568,11 @@
 [2020-03-25 08:26:07] local.ERROR: file_put_contents(/var/www/html/nds/storage/framework/views/2de446fb4a8b5408253a32e13db8e580f4dbdf8d.php): failed to open stream: Permission denied (View: /var/www/html/nds/resources/views/layouts/nav.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): file_put_contents(/var/www/html/nds/storage/framework/views/2de446fb4a8b5408253a32e13db8e580f4dbdf8d.php): failed to open stream: Permission denied (View: /var/www/html/nds/resources/views/layouts/nav.blade.php) at /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:133)
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/var/www/html/n...', 133, Array)
-#1 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(133): file_put_contents('/var/www/html/n...', '\\
+#1 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(133): file_put_contents('/var/www/html/n...', '\
+\
 <nav class=\"n...', 0)
-#2 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(150): Illuminate\\Filesystem\\Filesystem->put('/var/www/html/n...', '\\
+#2 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(150): Illuminate\\Filesystem\\Filesystem->put('/var/www/html/n...', '\
+\
 <nav class=\"n...')
 #3 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\\View\\Compilers\\BladeCompiler->compile('/var/www/html/n...')
 #4 /var/www/html/nds/vendor/facade/ignition/src/Views/Engines/CompilerEngine.php(37): Illuminate\\View\\Engines\\CompilerEngine->get('/var/www/html/n...', Array)
@@ -637,9 +639,11 @@
 [previous exception] [object] (ErrorException(code: 0): file_put_contents(/var/www/html/nds/storage/framework/views/2de446fb4a8b5408253a32e13db8e580f4dbdf8d.php): failed to open stream: Permission denied at /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:133)
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/var/www/html/n...', 133, Array)
-#1 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(133): file_put_contents('/var/www/html/n...', '\\
+#1 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(133): file_put_contents('/var/www/html/n...', '\
+\
 <nav class=\"n...', 0)
-#2 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(150): Illuminate\\Filesystem\\Filesystem->put('/var/www/html/n...', '\\
+#2 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(150): Illuminate\\Filesystem\\Filesystem->put('/var/www/html/n...', '\
+\
 <nav class=\"n...')
 #3 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\\View\\Compilers\\BladeCompiler->compile('/var/www/html/n...')
 #4 /var/www/html/nds/vendor/facade/ignition/src/Views/Engines/CompilerEngine.php(37): Illuminate\\View\\Engines\\CompilerEngine->get('/var/www/html/n...', Array)
@@ -706,9 +710,11 @@
 [2020-03-25 08:26:33] local.ERROR: file_put_contents(/var/www/html/nds/storage/framework/views/2de446fb4a8b5408253a32e13db8e580f4dbdf8d.php): failed to open stream: Permission denied (View: /var/www/html/nds/resources/views/layouts/nav.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): file_put_contents(/var/www/html/nds/storage/framework/views/2de446fb4a8b5408253a32e13db8e580f4dbdf8d.php): failed to open stream: Permission denied (View: /var/www/html/nds/resources/views/layouts/nav.blade.php) at /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:133)
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/var/www/html/n...', 133, Array)
-#1 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(133): file_put_contents('/var/www/html/n...', '\\
+#1 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(133): file_put_contents('/var/www/html/n...', '\
+\
 <nav class=\"n...', 0)
-#2 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(150): Illuminate\\Filesystem\\Filesystem->put('/var/www/html/n...', '\\
+#2 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(150): Illuminate\\Filesystem\\Filesystem->put('/var/www/html/n...', '\
+\
 <nav class=\"n...')
 #3 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\\View\\Compilers\\BladeCompiler->compile('/var/www/html/n...')
 #4 /var/www/html/nds/vendor/facade/ignition/src/Views/Engines/CompilerEngine.php(37): Illuminate\\View\\Engines\\CompilerEngine->get('/var/www/html/n...', Array)
@@ -775,9 +781,11 @@
 [previous exception] [object] (ErrorException(code: 0): file_put_contents(/var/www/html/nds/storage/framework/views/2de446fb4a8b5408253a32e13db8e580f4dbdf8d.php): failed to open stream: Permission denied at /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:133)
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/var/www/html/n...', 133, Array)
-#1 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(133): file_put_contents('/var/www/html/n...', '\\
+#1 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(133): file_put_contents('/var/www/html/n...', '\
+\
 <nav class=\"n...', 0)
-#2 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(150): Illuminate\\Filesystem\\Filesystem->put('/var/www/html/n...', '\\
+#2 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Compilers/BladeCompiler.php(150): Illuminate\\Filesystem\\Filesystem->put('/var/www/html/n...', '\
+\
 <nav class=\"n...')
 #3 /var/www/html/nds/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(51): Illuminate\\View\\Compilers\\BladeCompiler->compile('/var/www/html/n...')
 #4 /var/www/html/nds/vendor/facade/ignition/src/Views/Engines/CompilerEngine.php(37): Illuminate\\View\\Engines\\CompilerEngine->get('/var/www/html/n...', Array)

@@ -3,7 +3,7 @@ if($_GET['t'] == "divisions") { ?>
 <select name="division" id="divisionid">
     
 <?php 
-    $divisions = App\Division::where('department_id',$_GET['d'])->get(); 
+    $divisions = App\Division::where('agency_id',$_GET['d'])->get(); 
     echo "<option value=''>Select Division</option>";
     foreach($divisions as $division) {
     echo "<option value='$division->id'>$division->division</option>"; }
