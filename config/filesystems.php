@@ -65,17 +65,10 @@ return [
         ],
 
 	'sftp' => [
-<<<<<<< HEAD
-   	 	'driver' => '',
-   		 'host' => '',
-   		 'username' => '',
-   		 'password' => '',
-=======
    	 	'driver' => 'sftp',
    		 'host' => '172.30.3.95',
    		 'username' => '',
    		 'password' => '',
->>>>>>> swangdi
 		],
 
     ],
