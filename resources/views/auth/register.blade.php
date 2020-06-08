@@ -45,7 +45,7 @@
                         <div class="form-group row">
                             <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Agency') }}</label>
                             <div class="col-md-6">
-                                <select name="department" id="department" onchange="finddivisions(this.value)" required>
+                                <select name="department" id="department">
                                 <option value="">Please select...</option>
                                  @foreach($agencies as $agency)
                                  <option value="{{$agency->id}}">{{$agency->name}}</option>
@@ -61,11 +61,22 @@
                             <div class="col-md-6">
                                 <select name="division" id="divisionid">
                                     <option value="">Select Division</option>                             
-                                </select>
-                                <!-- <input id="division" type="text" class="form-control @error('division') is-invalid @enderror" name="division" value="{{ old('division') }}" required autocomplete="division" autofocus> -->
+                                </select>            
 
                             </div>  
-                        </div>                        
+                        </div>      
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="role" id="role">
+                                    <option value="">Select Role</option>   
+                                    @foreach($roles as $role)       
+                                    <option value="{{$role->id}}">{{$role->Role}}</option>  
+                                    @endforeach                   
+                                </select>            
+                            </div>  
+                        </div>                      
                       
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -117,8 +128,25 @@
         </div>
     </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+    $('#department').on('change',function(e){
+        var id = e.target.value;
+        $.get('/get-divisions?agencyId='+id,function(data){
+            console.log(data);
+            $('#divisionid').empty();
+            $('#divisionid').append('<option disabled value="">Select Division</option>');
+            $.each(data,function(index,divObj){
+                $('#divisionid').append('<option value="'+divObj.id+'">'+divObj.division+'</option>');
+            })
+
+        });
+    });
+
+    
+})
+
 function finddivisions(agencyid) {
   
   var xmlhttp = new XMLHttpRequest();

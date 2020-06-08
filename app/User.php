@@ -18,9 +18,10 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
+    protected $table = "tbl_users";
     protected $fillable = [
-        'name', 'email', 'password','cid','eid','designation','department_id','division_id','status','phone','officephone','profile_link'
-    ];
+        'name', 'email', 'password','cid','eid','designation','agency_id',
+        'division_id','status','phone','officephone','profile_image','role_id'];
 
     /**
      * The attributes that should be hidden for arrays.

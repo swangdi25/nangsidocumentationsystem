@@ -74,3 +74,10 @@ Route::get('/contactlist',function() {
 
 //Route::get('send-mail','MailController@sendmail');
 Route::get('/home', 'CreateController@index');
+
+
+//return master data.
+//.... roles.
+Route::get('/roles','MasterDataController@getRoles');
+//...get divisions.
+Route::get('/get-divisions','MasterDataController@getDivisions');
