@@ -15,15 +15,15 @@ class CreateLetterTable extends Migration
     {
         Schema::create('tbl_letters', function (Blueprint $table) {
             $table->id();
-            $table->string('reference_no');
-            $table->string('type');
-            $table->string('subject');
+            $table->string('reference_no',20);
+            $table->string('type',10);
+            $table->string('subject',100);
             $table->string('address');
             $table->string('place');
-            $table->string('filename');
+            $table->string('filename',50);
             $table->string('file_attachment_link');
             $table->boolean('important')->default(0);
-            $table->string('status');
+            $table->string('status',10);
             $table->date('action_date')->nullable();
             $table->foreignId('created_by')->nullable()->reference('id')->on('tbl_users');
             $table->timestamps();

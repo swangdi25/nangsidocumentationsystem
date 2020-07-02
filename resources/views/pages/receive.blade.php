@@ -2,7 +2,7 @@
 
 @extends('layouts.mainlayout')
 
-@section('title', 'Receive')
+@section('title', 'Upload')
 
 @section('sidebar')
 @section('content')
@@ -11,7 +11,7 @@
     <div class="row">
       @include('layouts.sidenav')
       <div class="col"> 
-        <div><strong><span>Receive</span></strong> &nbsp;&nbsp;<a class="btn bg-warning" href="/received">Received List</a>
+        <div><strong><span>Upload</span></strong> &nbsp;&nbsp;<a class="btn bg-warning" href="/received">Uploaded List</a>
         <hr>
         </div>
           <form method="POST" action="{{ route('create.store') }}" enctype="multipart/form-data" accept-charset="UTF-8">

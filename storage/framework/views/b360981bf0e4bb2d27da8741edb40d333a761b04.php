@@ -27,17 +27,16 @@
         <?php $__currentLoopData = $markeds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $m): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
                 <td><?php echo e($loop->iteration); ?></a></td>
-                <td><?php echo e($m->markedby); ?>(<?php echo e($m->email); ?>)</td>
+                <td><?php echo e($m->name); ?>(<?php echo e($m->email); ?>)</td>
                 <td><?php echo e($m->comment); ?></td>
-                <td><?php echo e($m->created_at->format('d/m/Y')); ?></td>
+                <td><?php echo e(date('d/m/Y',strtotime($m->created_at))); ?></td>
                 <td><a href= "<?php echo e(route('create.show',$m->letter_id)); ?>">View letter</a></td>
             </tr>
 
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>
     </table>
-        <?php echo e($markeds->links()); ?>
-
+      
     </div>
  </div>
 </div>

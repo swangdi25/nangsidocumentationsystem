@@ -1,18 +1,14 @@
 <!-- Stored in resources/views/pages/received.blade.php -->
-
 @extends('layouts.mainlayout')
-
-@section('title', 'Letter received')
-
+@section('title', 'Letter uploaded')
 @section('sidebar')
-
 @section('content')
 <div class="wrapper">
 <div class="container">
 <div class="row">
   @include('layouts.sidenav')
   <div class="col"> 
-  <div class="bg-secondary text-warning"><strong>Received List</strong></div>
+  <div class="bg-secondary text-warning"><strong>Uploaded List</strong></div>
     <table class= "table table-bordered table-sm" style="width:70%">
     <thead class="thead-primary">
             <tr>
@@ -30,17 +26,13 @@
                 <td>{{$letter->subject}}</td>
                 <td>{{$letter->address}}</td>
                 <td>{{$letter->place}}</td>
-                <td>{{$letter->created_at->format('d/m/Y')}}</td>
+                <td>{{date('d/m/Y',strtotime($letter->created_at))}}</td>
             </tr>
-
         @endforeach
     </tbody>
-    </table>
-        {{ $letters->links() }}
+    </table>      
     </div>
  </div>
 </div>
 </div>
-
-  
 @endsection

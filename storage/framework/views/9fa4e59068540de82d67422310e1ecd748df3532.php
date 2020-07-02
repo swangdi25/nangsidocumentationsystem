@@ -2,7 +2,7 @@
 
 
 
-<?php $__env->startSection('title', 'Receive'); ?>
+<?php $__env->startSection('title', 'Upload'); ?>
 
 <?php $__env->startSection('sidebar'); ?>
 <?php $__env->startSection('content'); ?>
@@ -11,7 +11,7 @@
     <div class="row">
       <?php echo $__env->make('layouts.sidenav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <div class="col"> 
-        <div><strong><span>Receive</span></strong> &nbsp;&nbsp;<a class="btn bg-warning" href="/received">Received List</a>
+        <div><strong><span>Upload</span></strong> &nbsp;&nbsp;<a class="btn bg-warning" href="/received">Uploaded List</a>
         <hr>
         </div>
           <form method="POST" action="<?php echo e(route('create.store')); ?>" enctype="multipart/form-data" accept-charset="UTF-8">

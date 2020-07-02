@@ -27,7 +27,7 @@
         @foreach($contacts as $contact)               
              <tr>       
                 <td>{{$contact->name}}</a></td>
-                <td>{{$contact->designation}},<br> {{$contact->department}} </td>
+                <td>{{$contact->designation}},<br> {{$contact->division}}, {{$contact->agency}} </td>
                 <td>{{$contact->email}}</td>      
                 <td>{{$contact->phone}}</td>           
                 <td>{{$contact->officephone}}</td>

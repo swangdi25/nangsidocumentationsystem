@@ -27,7 +27,7 @@
         <?php $__currentLoopData = $contacts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $contact): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>               
              <tr>       
                 <td><?php echo e($contact->name); ?></a></td>
-                <td><?php echo e($contact->designation); ?>,<br> <?php echo e($contact->department); ?> </td>
+                <td><?php echo e($contact->designation); ?>,<br> <?php echo e($contact->division); ?>, <?php echo e($contact->agency); ?> </td>
                 <td><?php echo e($contact->email); ?></td>      
                 <td><?php echo e($contact->phone); ?></td>           
                 <td><?php echo e($contact->officephone); ?></td>

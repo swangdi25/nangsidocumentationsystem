@@ -30,14 +30,12 @@
                 <td><?php echo e($letter->subject); ?></td>
                 <td><?php echo e($letter->address); ?></td>
                 <td><?php echo e($letter->place); ?></td>
-                <td><?php echo e($letter->created_at->format('d/m/Y')); ?></td>
+                <td><?php echo e(date('d/m/Y',strtotime($letter->created_at))); ?></td>
             </tr>
 
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>
-    </table>
-        <?php echo e($letters->links()); ?>
-
+    </table>       
     </div>
  </div>
 </div>

@@ -50,9 +50,9 @@ class NotifyController extends Controller
     {
         //
         $user = Auth::user();
-        $references = Reference::where('agency_id',$user->department_id)->get();        
+        $references = Reference::where('agency_id',$user->agency_id)->get();        
 
-        $dispatchno = Agency::where('id',$user->department_id)->get();
+        $dispatchno = Agency::where('id',$user->agency_id)->get();
         if($dispatchno->count() > 0)
         {
             foreach($dispatchno as $d)
@@ -92,14 +92,14 @@ class NotifyController extends Controller
            // $attachment_file->move('directorateServices',$filename);
             $randomfilename = rand();
             $path = $request->file('notification_file')->storeAs('notification/'.$monyear['year'].'/'.$monyear['mon'], $randomfilename . "_" . $filename);
-            $notification->file= $path;
+            $notification->file_link= $path;
             
         }
 
         $notification->subject = $request->notification_subject;
         $notification->from = $request->notification_from;
         $notification->summary = $request->notification_summary;
-        $notification->user_id = $user->id;
+        $notification->created_by = $user->id;
 
         //save reference number with dispatch number if the button use is clicked.
         if(isset($request->dispatch_reserved_no)) {
@@ -107,7 +107,7 @@ class NotifyController extends Controller
         }
         else {
         //set starting dispatch number.
-            $agency = Agency::find($user->department_id);
+            $agency = Agency::find($user->agency_id);
             if($agency->count() > 0)
             {
                 

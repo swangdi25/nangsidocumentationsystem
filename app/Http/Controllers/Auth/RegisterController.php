@@ -11,8 +11,6 @@ use App\Agency;
 use App\Mail\SendMailable;
 use DB;
 
-
-
 class RegisterController extends Controller
 {
     /*

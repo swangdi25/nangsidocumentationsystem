@@ -30,13 +30,12 @@
                 <td>{{$letter->subject}}</td>
                 <td>{{$letter->address}}</td>
                 <td>{{$letter->place}}</td>
-                <td>{{$letter->created_at->format('d/m/Y')}}</td>
+                <td>{{date('d/m/Y',strtotime($letter->created_at))}}</td>
             </tr>
 
         @endforeach
     </tbody>
-    </table>
-        {{ $letters->links() }}
+    </table>       
     </div>
  </div>
 </div>

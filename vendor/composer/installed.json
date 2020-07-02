@@ -99,15 +99,12 @@
             "bignum",
             "brick",
             "math"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
                 "url": "https://tidelift.com/funding/github/packagist/brick/math",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -508,8 +505,6 @@
             "strings",
             "uppercase",
             "words"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -524,7 +519,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finflector",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -583,8 +577,6 @@
         "keywords": [
             "constructor",
             "instantiate"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -599,7 +591,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finstantiator",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -664,8 +655,6 @@
             "lexer",
             "parser",
             "php"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -680,7 +669,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/doctrine%2Flexer",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -853,15 +841,12 @@
             "facade",
             "flare",
             "reporting"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
                 "url": "https://www.patreon.com/spatie",
                 "type": "patreon"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -1170,15 +1155,12 @@
             "cors",
             "crossdomain",
             "laravel"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
                 "url": "https://github.com/barryvdh",
                 "type": "github"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -1830,8 +1812,6 @@
             "markdown",
             "md",
             "parser"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -1858,7 +1838,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/league/commonmark",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -1945,15 +1924,12 @@
             "s3",
             "sftp",
             "storage"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
                 "url": "https://offset.earth/frankdejonge",
                 "type": "other"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -2107,8 +2083,6 @@
             "log",
             "logging",
             "psr-3"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -2119,7 +2093,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/monolog/monolog",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -2245,8 +2218,6 @@
             "date",
             "datetime",
             "time"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -2257,7 +2228,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/nesbot/carbon",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -2384,8 +2354,6 @@
             "laravel-zero",
             "php",
             "symfony"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -2400,7 +2368,6 @@
                 "url": "https://www.patreon.com/nunomaduro",
                 "type": "patreon"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -3193,8 +3160,6 @@
             "phpunit",
             "testing",
             "xunit"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -3205,7 +3170,6 @@
                 "url": "https://github.com/sebastianbergmann",
                 "type": "github"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -3718,15 +3682,12 @@
             "guid",
             "identifier",
             "uuid"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
                 "url": "https://github.com/ramsey",
                 "type": "github"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -3798,15 +3759,12 @@
             "highlight.js",
             "highlight.php",
             "syntax"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
                 "url": "https://github.com/allejo",
                 "type": "github"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -4591,9 +4549,6 @@
             }
         ],
         "description": "Symfony Console Component",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -4609,7 +4564,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/css-selector",
@@ -4664,9 +4618,6 @@
             }
         ],
         "description": "Symfony CssSelector Component",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -4682,7 +4633,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/deprecation-contracts",
@@ -4730,9 +4680,6 @@
             }
         ],
         "description": "A generic function and convention to trigger deprecation notices",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -4748,7 +4695,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/error-handler",
@@ -4807,9 +4753,6 @@
             }
         ],
         "description": "Symfony ErrorHandler Component",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -4825,7 +4768,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/event-dispatcher",
@@ -4899,9 +4841,6 @@
             }
         ],
         "description": "Symfony EventDispatcher Component",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -4917,7 +4856,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/event-dispatcher-contracts",
@@ -4977,8 +4915,6 @@
             "interfaces",
             "interoperability",
             "standards"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -4993,7 +4929,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -5045,9 +4980,6 @@
             }
         ],
         "description": "Symfony Finder Component",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -5063,7 +4995,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/http-foundation",
@@ -5126,9 +5057,6 @@
             }
         ],
         "description": "Symfony HttpFoundation Component",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -5144,7 +5072,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/http-kernel",
@@ -5245,9 +5172,6 @@
             }
         ],
         "description": "Symfony HttpKernel Component",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -5263,7 +5187,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/mime",
@@ -5328,8 +5251,6 @@
         "keywords": [
             "mime",
             "mime-type"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -5344,7 +5265,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -5405,8 +5325,6 @@
             "ctype",
             "polyfill",
             "portable"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -5421,7 +5339,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -5483,8 +5400,6 @@
             "polyfill",
             "portable",
             "shim"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -5499,7 +5414,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -5562,8 +5476,6 @@
             "polyfill",
             "portable",
             "shim"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -5578,7 +5490,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -5643,8 +5554,6 @@
             "polyfill",
             "portable",
             "shim"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -5659,7 +5568,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -5725,8 +5633,6 @@
             "polyfill",
             "portable",
             "shim"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -5741,7 +5647,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -5803,8 +5708,6 @@
             "polyfill",
             "portable",
             "shim"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -5819,7 +5722,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -5877,8 +5779,6 @@
             "polyfill",
             "portable",
             "shim"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -5893,7 +5793,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -5954,8 +5853,6 @@
             "polyfill",
             "portable",
             "shim"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -5970,7 +5867,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -6035,8 +5931,6 @@
             "polyfill",
             "portable",
             "shim"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -6051,7 +5945,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -6104,9 +5997,6 @@
             }
         ],
         "description": "Symfony Process Component",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -6122,7 +6012,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/routing",
@@ -6202,8 +6091,6 @@
             "routing",
             "uri",
             "url"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -6218,7 +6105,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -6279,8 +6165,6 @@
             "interfaces",
             "interoperability",
             "standards"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -6295,7 +6179,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -6369,8 +6252,6 @@
             "unicode",
             "utf-8",
             "utf8"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -6385,7 +6266,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -6466,9 +6346,6 @@
             }
         ],
         "description": "Symfony Translation Component",
-<<<<<<< HEAD
-        "homepage": "https://symfony.com"
-=======
         "homepage": "https://symfony.com",
         "funding": [
             {
@@ -6484,7 +6361,6 @@
                 "type": "tidelift"
             }
         ]
->>>>>>> swangdi
     },
     {
         "name": "symfony/translation-contracts",
@@ -6543,8 +6419,6 @@
             "interfaces",
             "interoperability",
             "standards"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -6559,7 +6433,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -6638,8 +6511,6 @@
         "keywords": [
             "debug",
             "dump"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -6654,7 +6525,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -6814,8 +6684,6 @@
             "dotenv",
             "env",
             "environment"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -6826,7 +6694,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/vlucas/phpdotenv",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {
@@ -6877,8 +6744,6 @@
             "ascii",
             "clean",
             "php"
-<<<<<<< HEAD
-=======
         ],
         "funding": [
             {
@@ -6897,7 +6762,6 @@
                 "url": "https://tidelift.com/funding/github/packagist/voku/portable-ascii",
                 "type": "tidelift"
             }
->>>>>>> swangdi
         ]
     },
     {

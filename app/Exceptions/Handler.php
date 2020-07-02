@@ -14,14 +14,6 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         //
-<<<<<<< HEAD
-//	\Illuminate\Auth\AuthenticationException::class,
-  //  	\Illuminate\Auth\Access\AuthorizationException::class,
-    //	\Symfony\Component\HttpKernel\Exception\HttpException::class,
-    //	\Illuminate\Database\Eloquent\ModelNotFoundException::class,
-    //	\Illuminate\Validation\ValidationException::class,
-=======
->>>>>>> swangdi
     ];
 
     /**
@@ -58,20 +50,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-<<<<<<< HEAD
-	if($this->isHttpException($exception)) {
-	  if($exception->getStatusCode() == 404)
-		{
-		return response()->view('errors.'.'404',[] 404);
-		}
-	}
-	
- 	 if ($exception instanceof CustomException) {
-        	return response()->view('errors.custom', [], 500);
-  		}
-
-=======
->>>>>>> swangdi
         return parent::render($request, $exception);
     }
 }
