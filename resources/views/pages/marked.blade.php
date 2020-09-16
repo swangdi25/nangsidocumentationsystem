@@ -27,16 +27,16 @@
         @foreach($markeds as $m)
             <tr>
                 <td>{{$loop->iteration}}</a></td>
-                <td>{{$m->markedto}}({{$m->email}})</td>
+                <td>{{$m->name}}({{$m->email}})</td>
                 <td>{{$m->comment}}</td>
-                <td>{{$m->created_at->format('d/m/Y')}}</td>
+                <td>{{date('d/m/Y',strtotime($m->created_at))}}</td>
                 <td><a href= "{{ route('create.show',$m->letter_id) }}">View letter</a></td>
             </tr>
 
         @endforeach
     </tbody>
     </table>
-        {{ $markeds->links() }}
+       
     </div>
  </div>
 </div>

@@ -26,15 +26,15 @@
         @foreach($letters as $letter)
             <tr>
                 <td> <a href= "{{ route('create.show',$letter->id) }}">{{$letter->reference_no}}</a></td>
-                <td>{{$letter->name}}({{$letter->email}})</td>
+                <td>{{$letter->email}}</td>
                 <td>{{$letter->subject}}</td>
-                <td>{{$letter->created_at}}</td>
+                <td>{{date('d/m/Y',strtotime($letter->created_at))}}</td>
             </tr>
 
         @endforeach
     </tbody>
     </table>
-        {{ $letters->links() }}
+      
     </div>
  </div>
 </div>

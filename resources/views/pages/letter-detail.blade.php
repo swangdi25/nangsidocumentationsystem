@@ -17,15 +17,16 @@
 	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#letterHead" aria-expanded="true" aria-controls="collapseOne">
           Details
         </button>
+       
 <div id="letterHead" class="collapse" aria-labelledby="headingOne" data-parent="#detailHead">	
             <div class="form-group row">
               <label class="col-sm-2" for="inputDispatchNo">Dispatch No:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="inputDispatchNo" readonly value="{{$letter[0]->reference_no}}">
+                    <input type="text" class="form-control" id="inputDispatchNo" readonly value="{{$letter->reference_no}}">
                 </div>
                 <label class="col-sm-2" for="inputFrom">From:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="inputFrom" value="{{$senderemail[0]->email}}" readonly>
+                    <input type="text" class="form-control" id="inputFrom" value="{{$letter->email}}" readonly>
                 </div>
             </div>
 
@@ -43,31 +44,31 @@
             <div class="form-group row"> 
                 <label class="col-sm-2" for="inputaddress">Address:</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="inputaddress" value="{{$letter[0]->address}}" readonly>
+                    <input type="text" class="form-control" id="inputaddress" value="{{$letter->address}}" readonly>
                 </div>
                 <label class="col-sm-2" for="inputplace">Place:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="inputplace" value="{{$letter[0]->place}}" readonly>
+                    <input type="text" class="form-control" id="inputplace" value="{{$letter->place}}" readonly>
                 </div>
               </div>
 
               <div class="form-group row"> 
                 <label class="col-sm-2" for="inputSubject">Subject:</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputSubject" value="{{$letter[0]->subject}}" readonly>
+                    <input type="text" class="form-control" id="inputSubject" value="{{$letter->subject}}" readonly>
                 </div>
               </div>
 
 	</div></div> <!-- collapse end -->
-
-            @if(!empty($letter[0]->file_attachment_link))
+  
+            @if(!empty($letter->file_attachment_link))
               <div class="form-group row"> 
-                <div class="col-sm-12"> 
-                <!--  <embed src="{{ asset('storage/'.$letter[0]->file_attachment_link) }}" id="img"> -->
-		<iframe src="{{ asset('storage/'.$letter[0]->file_attachment_link) }}" style="width:100%; height:500px;" frameborder="0"></iframe>
+                <div class="col-sm-12">              
+		              <iframe src="{{ asset('storage/'.$letter->file_attachment_link) }}" style="width:100%; height:500px;" frameborder="0"></iframe>
                 </div>
               </div>
             @endif
+        
             <div class="form-group row">
             @if($comments->count() > 0)
             <label class="col-sm-2" for="comments">Comments:</label>
@@ -92,7 +93,7 @@
             </div>  
     <form method="POST" action="{{ route('marked.store') }}" accept-charset="UTF-8" >
           @csrf
-          <input type="hidden" id="letterid" name="letter_id" value="{{$letter[0]->id}}">
+          <input type="hidden" id="letterid" name="letter_id" value="{{$letter->id}}">
 
             <div class="form-group row">
               <label class="col-sm-2" for="markTo">Mark to:</label>
@@ -111,7 +112,7 @@
             <div class="form-group row">  
             <label class="col-sm-2" for="markid"></label>
                 <div class="col-sm-6">
-                <input type="hidden" id="statusid" name="status" value="{{$letter[0]->status}}">
+                <input type="hidden" id="statusid" name="status" value="{{$letter->status}}">
                 <button id="markid" type="submit" class="btn btn-primary">Mark</button> &nbsp;&nbsp; <input id="closeid" type="submit" class="btn btn-primary" onclick="closecomment();" value="Close"/>
                 </div>             
             </div>  
