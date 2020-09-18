@@ -37,11 +37,7 @@
         @endforeach
     </tbody>
     </table>
-<<<<<<< HEAD
        
-=======
-      
->>>>>>> master
     </div>
  </div>
 </div>
