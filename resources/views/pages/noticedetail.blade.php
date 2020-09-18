@@ -49,8 +49,7 @@
 </div></div> <!-- end of collapse -->
             <div class="form-group row"> 
                 <div class="col-sm-12">
-              <!--  <embed src="{{ asset('storage/'.$notice->file) }}" id="notify_file" width="640px" height="300px"> -->
-		 <iframe src="{{ asset('storage/'.$notice->file) }}" style="width:100%; height:500px;" frameborder="0"></iframe>
+		              <iframe src="{{ asset('storage/'.$notice->file_link) }}" style="width:100%; height:500px;" frameborder="0"></iframe>
                 </div>
             </div>            
      @endforeach

@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Marked extends Model
 {
     //
-    protected $table='tbl_markeds';
+    protected $table = 'tbl_markeds';
+    protected $primaryKey = 'id';
 }

@@ -19,7 +19,7 @@ class CreateReferenceTable extends Migration
             $table->text('description');
             $table->foreignId('agency_id')->nullable()->reference('id')->on('tbl_agencies');
             $table->foreignId('division_id')->nullable()->reference('id')->on('tbl_divisions');
-            $table->string('status',10);
+            $table->string('status',10)->default('active');
             $table->foreignId('created_by')->constraint()->reference('id')->on('tbl_users');
             $table->timestamps();
         });

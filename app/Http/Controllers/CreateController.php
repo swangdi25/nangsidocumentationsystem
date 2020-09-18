@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Letterdetail;
 use App\Letter;
 use App\Marked;
 use App\Incoming;
@@ -28,14 +27,32 @@ class CreateController extends Controller
     public function index()
     {
         //
-        //     $letters = Letterdetail::where(['impt' => '0','p' => '0','mode' => 'direct','r_id' => Auth::id()])->orderBy('created_at','desc')->paginate(7);
-        //   $letters = IncomingLetters::paginate(7);
-
-        $sql = "select tbl_letters.id,tbl_letters.reference_no,tbl_letters.subject,tbl_letters.created_at,tbl_users.email from tbl_letters
-        join tbl_incomings on tbl_letters.id = tbl_incomings.letter_id
-        join tbl_users on tbl_users.id = tbl_letters.created_by";
+       //  $letters = Letterdetail::where(['impt' => '0','p' => '0','mode' => 'direct','r_id' => Auth::id()])->orderBy('created_at','desc')->paginate(7);
         
-        $letters = DB::select($sql);
+        // $sql = "select tbl_letters.id,reference_no,subject,file_attachment_link,tbl_users.name,tbl_users.email,tbl_letters.created_at from tbl_letters 
+        //         join tbl_incomings on tbl_letters.id = tbl_incomings.letter_id
+        //         join tbl_users on tbl_users.id = tbl_letters.created_by
+        //         where tbl_incomings.mode_of_receive = 'direct'
+        //         and  tbl_incomings.receiver_id = ". Auth::id();
+
+
+            
+     //  dd($sql);
+    //   $letters = DB::select($sql);
+      
+       $letters =  DB::table('tbl_letters')                
+                    ->join('tbl_users','tbl_letters.created_by','=','tbl_users.id')
+                    ->select('tbl_letters.id','tbl_letters.reference_no','tbl_letters.subject','tbl_letters.address','tbl_letters.place','tbl_letters.file_attachment_link','tbl_users.email','tbl_letters.status','tbl_letters.created_at') 
+                    ->where('tbl_letters.important','=',0)   
+                    ->whereExists(function ($query) {
+                        $query->select(DB::raw(1))
+                              ->from('tbl_incomings')
+                              ->where('tbl_incomings.receiver_id','=',Auth::id())
+                              ->whereRaw('tbl_incomings.letter_id = tbl_letters.id');
+                    })
+                    ->get();
+       
+     //   $letters = IncomingLetters::paginate(7);
 
           //check if letter is read by the user.
             $read_status_array[] = null;
@@ -59,7 +76,10 @@ class CreateController extends Controller
         //get department_id of user.
         $user = Auth::user();
 
-        $references = Reference::where('agency_id',$user->agency_id)->get();        
+        //$references = Reference::where('agency_id',$user->department_id)->get(); 
+        $sql = "select reference from tbl_references where agency_id = " .$user->agency_id;    
+       
+        $references = DB::select($sql);
 
         $dispatchno = Agency::where('id',$user->agency_id)->get();
         if($dispatchno->count() > 0)
@@ -114,7 +134,7 @@ class CreateController extends Controller
         //          { $userlist =  $userlist. ",".$udecoded;  }
         //         else { $userlist =$udecoded; }
         //     }
-        //     $letter->sent_to =$userlist;        
+        //  //   $letter->sent_to =$userlist;        
         // } 
 
         // if(!empty($request->cceds))
@@ -157,10 +177,7 @@ class CreateController extends Controller
         $letter->created_by = $user->id;
         $letter->address = $request->address;
         $letter->place = $request->place;
-        $letter->subject = $request->subject;
-
-        //change type to received/dispatched/notice.
-        $letter->type = $request->receive_or_dispatch;
+       
 
         //save reference number with dispatch number if the button use is clicked.
         if($request->receive_or_dispatch == "dispatch")
@@ -190,28 +207,31 @@ class CreateController extends Controller
 
                     $agency->save();            
                 }
+              
+                $letter->type = 'dispatch';
             }
             else
             {
+              //update if the letter is received or dispatched.
                 $letter->reference_no = $request->reference_no;
-            }
+                $letter->type = 'upload';
+            }        
         
         $letter->save();
        
         //insert receiver into table incoming.
-
         //get users to:
         if(!empty($request->users)) 
         {
             $uu = $request->users;
             foreach($uu as $u)
              {
-            $udecoded = json_decode($u);
-            $incoming = new Incoming;
-            $incoming->letter_id = $letter->id;
-            $incoming->mode_of_receive = "direct";
-            $incoming->receiver_id = $udecoded;
-            $incoming->save();
+                $udecoded = json_decode($u);
+                $incoming = new Incoming;
+                $incoming->letter_id = $letter->id;
+                $incoming->mode_of_receive = "direct";
+                $incoming->receiver_id = $udecoded;
+                $incoming->save();
             }
         }  
                 
@@ -245,26 +265,32 @@ class CreateController extends Controller
         $recievers = "";
         $ccedlist = "";
 
-        $user = auth()->user();
+        $letter =  DB::table('tbl_letters')                
+                        ->join('tbl_users','tbl_letters.created_by','=','tbl_users.id')
+                        ->select('tbl_letters.id','tbl_letters.reference_no','tbl_letters.subject','tbl_letters.address','tbl_letters.place','tbl_letters.file_attachment_link','tbl_letters.place','tbl_users.email','tbl_letters.status')
+                        ->where('tbl_letters.id','=', $id)                    
+                        ->first();
 
-        //check if user received the letter in the incoming letter.
-        if(Incoming::where('letter_id','=',$id)
-                    ->where('receiver_id','=',$user->id)
-                    ->first()) 
-        {                   
-
-        $letter = Letter::where('id','=',$id)->get();
         $comments = Marked::where('letter_id','=',$id)->get();
-        $receivers = DB::table('tbl_incomings')
-                            ->where('tbl_incomings.letter_id','=',$id)
-                            ->join('tbl_users','tbl_users.id','=','tbl_incomings.receiver_id')
-                            ->select('tbl_users.email','tbl_incomings.mode_of_receive')            
+
+        // $lsql = "select tbl_letters.id,reference_no,subject,file_attachment_link,tbl_users.name,tbl_users.email,tbl_incomings.mode_of_receive,tbl_incomings.receiver_id from tbl_letters 
+        //         join tbl_incomings on tbl_letters.id = tbl_incomings.letter_id
+        //         join tbl_users on tbl_users.id = tbl_letters.created_by
+        //         where tbl_letters.id = " . $id ."
+        //         and tbl_incomings.receiver_id = ". Auth::id();
+
+        $letterdetail = DB::table('tbl_incomings')            
+                            ->join('tbl_users','tbl_incomings.receiver_id','=','tbl_users.id')
+                            ->select('tbl_users.email','tbl_incomings.mode_of_receive')                                          
+                            ->where('tbl_incomings.receiver_id','=' ,Auth::id())    
+                            ->where('tbl_incomings.letter_id','=',$id)        
                             ->get();
-     //   $letterdetail = Letterdetail::where('id','=',$id)->get();
+
+      //  $letterdetail = DB::select($lsql);
 
         //get list of receivers and cced.
-       foreach($receivers as $ll) 
-       {
+       foreach($letterdetail as $ll) 
+       {                    
             if($ll->mode_of_receive == "direct") {
                 if(!empty($recievers)) {
                     $recievers = $recievers.",".$ll->email;
@@ -279,12 +305,12 @@ class CreateController extends Controller
                 if(!empty($ccedlist)) {
                 $ccedlist = $ccedlist . "," . $ll->email;
                 } else { $ccedlist = $ll->email;}
-           }
-
+            }
        }
-
         //get sender email.
-        $senderemail = User::select('email')->where('id',$letter[0]->created_by)->get();
+        // $senderemail = User::select('email')->where('id',$l->user_id)->get();
+        // dd($senderemail);
+        //read status.
 
         
         //update read status.
@@ -294,13 +320,7 @@ class CreateController extends Controller
         $read->read_by = Auth::id();
         $read->save();
 
-        
-
-        return view('pages.letter-detail',compact('id','letter','comments','senderemail','recievers','ccedlist'));
-        }
-        else{
-            return view('home');
-        }
+        return view('pages.letter-detail',compact('id','letter','comments','recievers','ccedlist'));
 
     }
 
@@ -309,10 +329,22 @@ class CreateController extends Controller
      * show important letter(s)
      */
     public function showletters() {
-
          //
-         $letters = Letterdetail::where(['impt' => '1','mode' => 'direct','r_id' => Auth::id()])->paginate(7);
+        // $letters = Letterdetail::where(['impt' => '1','mode' => 'direct','r_id' => Auth::id()])->paginate(7);
         // $letters = IncomingLetters::paginate(7);
+
+        $letters =  DB::table('tbl_letters')                
+                    ->join('tbl_users','tbl_letters.created_by','=','tbl_users.id')
+                    ->select('tbl_letters.id','tbl_letters.reference_no','tbl_letters.subject','tbl_letters.address','tbl_letters.place','tbl_letters.file_attachment_link','tbl_users.email','tbl_letters.status','tbl_letters.created_at') 
+                    ->where('tbl_letters.important','=',1)   
+                    ->whereExists(function ($query) {
+                        $query->select(DB::raw(1))
+                            ->from('tbl_incomings')
+                            ->where('tbl_incomings.mode_of_receive','=','direct')
+                            ->where('tbl_incomings.receiver_id','=',Auth::id())
+                            ->whereRaw('tbl_incomings.letter_id = tbl_letters.id');
+                    })
+                    ->get();
 
       //check if letter is read by the user.
         $read_status_array[] = null;
@@ -331,7 +363,14 @@ class CreateController extends Controller
      */
     public function marked()
     {
-        $markeds = Markview::where('markedbyId','=',Auth::id())->orderBy('created_at','desc')->paginate(10);
+       // $markeds = Markview::where('markedbyId','=',Auth::id())->orderBy('created_at','desc')->paginate(10);
+        $markeds = DB::table('tbl_markeds')
+                        ->join('tbl_users','tbl_users.id','=','tbl_markeds.created_by')
+                        ->select('tbl_markeds.id','tbl_users.name','comment','letter_id','marked_to','created_by','tbl_markeds.created_at','tbl_users.email')
+                        ->where('created_by','=',Auth::id())
+                        ->orderBy('created_at','desc')
+                        ->get();
+
         return view('pages.marked',compact('markeds'));
     }
 
@@ -342,22 +381,38 @@ class CreateController extends Controller
     public function copyletter() {
 
         //
-        $letters = Letterdetail::where(['mode' => 'cced','r_id' => Auth::id()])->paginate(7);
+       // $letters = Letterdetail::where(['mode' => 'cced','r_id' => Auth::id()])->paginate(7);
+
+        $letters =  DB::table('tbl_letters')                
+                    ->join('tbl_users','tbl_letters.created_by','=','tbl_users.id')
+                    ->select('tbl_letters.id','tbl_letters.reference_no','tbl_letters.subject','tbl_letters.address','tbl_letters.place','tbl_letters.file_attachment_link','tbl_users.email','tbl_letters.status','tbl_letters.created_at') 
+                    ->where('tbl_letters.important','=',0)   
+                    ->whereExists(function ($query) {
+                        $query->select(DB::raw(1))
+                            ->from('tbl_incomings')
+                            ->where('tbl_incomings.mode_of_receive','=','cced')
+                            ->where('tbl_incomings.receiver_id','=',Auth::id())
+                            ->whereRaw('tbl_incomings.letter_id = tbl_letters.id');
+                    })
+                    ->get();
     //   $letters = IncomingLetters::paginate(7);
 
        return view('pages.copyletter', compact('letters'));
    }
-
    
    /**
      * 
      * show important copy letter(s)
      */
     public function outgoing() {
-
         //
-        $letters = Letter::where(['dispatched_received' => true,'user_id' => Auth::id()])->paginate(10);
-    //   $letters = IncomingLetters::paginate(7);
+       // $letters = Letter::where(['dispatched_received' => true,'user_id' => Auth::id()])->paginate(10);
+       $letters =  DB::table('tbl_letters')                                         
+                    ->select('id','reference_no','subject','address','place','created_at')
+                    ->where('created_by','=', Auth::id())
+                    ->where('type','=','dispatch')      
+                    ->get();
+    //   $letters = IncomingLetters::paginate(7);        
 
        return view('pages.outgoing', compact('letters'));
    }
@@ -366,8 +421,13 @@ class CreateController extends Controller
 
    public function received() {
 
-    //
-    $letters = Letter::where(['dispatched_received' => false,'user_id' => Auth::id()])->paginate(10);
+   // $letters = Letter::where(['dispatched_received' => false,'user_id' => Auth::id()])->paginate(10);
+   $letters =  DB::table('tbl_letters')  
+                ->join('tbl_incomings','tbl_letters.id','=','tbl_incomings.letter_id')                                       
+                ->select('tbl_letters.id','tbl_letters.reference_no','subject','address','place','tbl_letters.created_at')
+                ->where('tbl_incomings.receiver_id','=', Auth::id()) 
+                ->where('tbl_letters.type','=','upload')
+                ->get();
 //   $letters = IncomingLetters::paginate(7);
 
    return view('pages.received', compact('letters'));

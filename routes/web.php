@@ -66,7 +66,12 @@ Route::get('changepassword', 'ChangePasswordController@index');
 Route::post('changepassword', 'ChangePasswordController@store')->name('change.password');
 
 Route::get('/contactlist',function() {
-    $contacts = DB::table('contact_list')->paginate(10);
+    $contacts = DB::table('tbl_users')
+                    ->join('tbl_agencies','tbl_agencies.id','=','tbl_users.agency_id')
+                    ->leftjoin('tbl_divisions','tbl_divisions.id','=','tbl_users.division_id') 
+                    ->select('tbl_users.name','tbl_users.designation','tbl_users.email','tbl_divisions.division','tbl_agencies.name as agency','tbl_users.phone','tbl_users.officephone') 
+                    ->where('tbl_users.status','=',0)                     
+                    ->paginate(10);
     return view('pages.contactlist',compact('contacts'));
 });
 

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Marked;
-use App\Markview;
 use App\Letter;
+use DB;
 
 class MarkController extends Controller
 {
@@ -22,7 +22,13 @@ class MarkController extends Controller
     public function index()
     {
         //
-        $markeds = Markview::where('marked_to','=',Auth::id())->orderBy('created_at','desc')->paginate(10);
+        //$markeds = Markview::where('marked_to','=',Auth::id())->orderBy('created_at','desc')->paginate(10);
+
+        $markeds = DB::table('tbl_markeds')
+                        ->join('tbl_users','tbl_users.id','=','tbl_markeds.created_by')
+                        ->select('tbl_markeds.id','tbl_users.name','comment','letter_id','marked_to','created_by','tbl_markeds.created_at','tbl_users.email')
+                        ->where('marked_to','=',Auth::id())
+                        ->get();
         return view('pages.markedToMe',compact('markeds'));
     }
 
@@ -60,14 +66,15 @@ class MarkController extends Controller
             
             $comment->save();
        
-            // to close the letter process.
-            $letter = Letter::find($request->letter_id);
-            //if input is to close.
-            if($request->comment == "closed") {
-                $letter->status="closed";
-            } elseif($request->comment == "opened") {  $letter->status="open";}
+            // // to close the letter process.
+            // $letter = Letter::find($request->letter_id);
+
+            // if($letter->status == "closed") {
+            //     $letter->status="opened";
+            // } else {  $letter->status="closed";}
           
-            $letter->save();
+            // $letter->save();      
+      
 
         return redirect(url()->previous())->with('success','comment provided');
 

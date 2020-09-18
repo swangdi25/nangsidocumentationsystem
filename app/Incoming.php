@@ -8,4 +8,5 @@ class Incoming extends Model
 {
     //
     protected $table = 'tbl_incomings';
+    protected $primaryKey = 'id';
 }
