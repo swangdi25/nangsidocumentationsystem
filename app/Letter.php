@@ -8,5 +8,5 @@ class Letter extends Model
 {
     //
 
-    
+    protected $table = 'tbl_letters';
 }

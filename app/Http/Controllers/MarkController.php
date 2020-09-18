@@ -55,21 +55,19 @@ class MarkController extends Controller
             {    $comment->marked_to = Auth::id(); }
             else {$comment->marked_to = $request->marked_to; }
 
-            $comment->user_id = Auth::id();            
+            $comment->created_by = Auth::id();            
             $comment->comment = $request->comment;
             
             $comment->save();
        
             // to close the letter process.
             $letter = Letter::find($request->letter_id);
-            if($letter->status == "closed") {
-                $letter->status="opened";
-            } else {  $letter->status="closed";}
+            //if input is to close.
+            if($request->comment == "closed") {
+                $letter->status="closed";
+            } elseif($request->comment == "opened") {  $letter->status="open";}
           
             $letter->save();
-
-       
-      
 
         return redirect(url()->previous())->with('success','comment provided');
 

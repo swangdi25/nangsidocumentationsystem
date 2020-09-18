@@ -24,6 +24,7 @@
                   @endforeach
                   </select>    
                   <input type="hidden" name="dispatch_reserved_no" id="dispatch_reserved">
+                  <input type="hidden" name="receive_or_dispatch" value="receive">
                 </div>
                 <div class="col-sm-2">         
                  <table><tr>                      

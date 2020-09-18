@@ -10,11 +10,10 @@ use App\Marked;
 use App\Incoming;
 use App\Agency;
 use App\Reference;
-use App\Markview;
 use App\User;
 use App\ReadStatus;
 use Illuminate\Support\Facades\Storage;
-
+use DB;
 class CreateController extends Controller
 {
     public function __construct()
@@ -29,8 +28,14 @@ class CreateController extends Controller
     public function index()
     {
         //
-         $letters = Letterdetail::where(['impt' => '0','p' => '0','mode' => 'direct','r_id' => Auth::id()])->orderBy('created_at','desc')->paginate(7);
-     //   $letters = IncomingLetters::paginate(7);
+        //     $letters = Letterdetail::where(['impt' => '0','p' => '0','mode' => 'direct','r_id' => Auth::id()])->orderBy('created_at','desc')->paginate(7);
+        //   $letters = IncomingLetters::paginate(7);
+
+        $sql = "select tbl_letters.id,tbl_letters.reference_no,tbl_letters.subject,tbl_letters.created_at,tbl_users.email from tbl_letters
+        join tbl_incomings on tbl_letters.id = tbl_incomings.letter_id
+        join tbl_users on tbl_users.id = tbl_letters.created_by";
+        
+        $letters = DB::select($sql);
 
           //check if letter is read by the user.
             $read_status_array[] = null;
@@ -54,9 +59,9 @@ class CreateController extends Controller
         //get department_id of user.
         $user = Auth::user();
 
-        $references = Reference::where('agency_id',$user->department_id)->get();        
+        $references = Reference::where('agency_id',$user->agency_id)->get();        
 
-        $dispatchno = Agency::where('id',$user->department_id)->get();
+        $dispatchno = Agency::where('id',$user->agency_id)->get();
         if($dispatchno->count() > 0)
         {
             foreach($dispatchno as $d)
@@ -66,6 +71,7 @@ class CreateController extends Controller
                 }
                 else {
                     $dispatchno->dispatch_no = 1;
+                    $dno = 1;
                 }
          
             }
@@ -98,41 +104,41 @@ class CreateController extends Controller
         $cclist;
 
         //get list of To(receiver) arrays from request.
-        if(!empty($request->users))
-        { 
-            $uu = $request->users; //in json.
-            foreach($uu as $u)   //make userlist of To to string:
-            {
-                 $udecoded = json_decode($u);
-                 if(!empty($userlist)) 
-                 { $userlist =  $userlist. ",".$udecoded;  }
-                else { $userlist =$udecoded; }
-            }
-            $letter->sent_to =$userlist;        
-        } 
+        // if(!empty($request->users))
+        // { 
+        //     $uu = $request->users; //in json.
+        //     foreach($uu as $u)   //make userlist of To to string:
+        //     {
+        //          $udecoded = json_decode($u);
+        //          if(!empty($userlist)) 
+        //          { $userlist =  $userlist. ",".$udecoded;  }
+        //         else { $userlist =$udecoded; }
+        //     }
+        //     $letter->sent_to =$userlist;        
+        // } 
 
-        if(!empty($request->cceds))
-        { $cc = $request->cceds;//in json.
-        // get userlist of Cc to string:
-            foreach($cc as $c)
-            {
-                $cdecode =  json_decode($c);
-                if(!empty($cclist))
-                { $cclist =  $cclist. ",".$cdecode; }
-                else { $cclist = $cdecode; }
-            }
-            $letter->cc_to = $cclist;
-        } 
+        // if(!empty($request->cceds))
+        // { $cc = $request->cceds;//in json.
+        // // get userlist of Cc to string:
+        //     foreach($cc as $c)
+        //     {
+        //         $cdecode =  json_decode($c);
+        //         if(!empty($cclist))
+        //         { $cclist =  $cclist. ",".$cdecode; }
+        //         else { $cclist = $cdecode; }
+        //     }
+        //     $letter->cc_to = $cclist;
+        // } 
 
         if($request->hasfile('attachment_doc'))
         {
 
-	    $monYear = getdate();
+	        $monYear = getdate();
             $attached_file = $request->file('attachment_doc');
             $filename = $attached_file->getClientOriginalName();
            // $attachment_file->move('directorateServices',$filename);
             $randomfilename = rand();
-            $path = $request->file('attachment_doc')->storeAs($user->department_id.'/'.$monYear['year'].'/'.$monYear['mon'], $randomfilename . "_". $filename);
+            $path = $request->file('attachment_doc')->storeAs($user->agency_id.'/'.$monYear['year'].'/'.$monYear['mon'], $randomfilename . "_". $filename);
             $letter->filename= $filename;
             $letter->file_attachment_link = $path;
 	
@@ -148,9 +154,13 @@ class CreateController extends Controller
         }
 
         $letter->action_date = $request->action_date;
-        $letter->user_id = $user->id;
+        $letter->created_by = $user->id;
         $letter->address = $request->address;
         $letter->place = $request->place;
+        $letter->subject = $request->subject;
+
+        //change type to received/dispatched/notice.
+        $letter->type = $request->receive_or_dispatch;
 
         //save reference number with dispatch number if the button use is clicked.
         if($request->receive_or_dispatch == "dispatch")
@@ -160,7 +170,7 @@ class CreateController extends Controller
                 }
                 else {
                 //set starting dispatch number.
-                    $agency = Agency::find($user->department_id);
+                    $agency = Agency::find($user->agency_id);
                     if($agency->count() > 0)
                     {
                         
@@ -185,13 +195,6 @@ class CreateController extends Controller
             {
                 $letter->reference_no = $request->reference_no;
             }
-       
-        //update if the letter is received or dispatched.
-
-        if($request->receive_or_dispatch == "receive")
-        {
-            $letter->dispatched_received = false; //else default value is true.
-        }
         
         $letter->save();
        
@@ -200,6 +203,7 @@ class CreateController extends Controller
         //get users to:
         if(!empty($request->users)) 
         {
+            $uu = $request->users;
             foreach($uu as $u)
              {
             $udecoded = json_decode($u);
@@ -214,6 +218,7 @@ class CreateController extends Controller
         // get users cced:
         if(!empty($request->cceds)) 
         {
+            $cc = $request->cceds;
             foreach($cc as $c)
             {
                 $udecoded = json_decode($c);
@@ -240,43 +245,62 @@ class CreateController extends Controller
         $recievers = "";
         $ccedlist = "";
 
+        $user = auth()->user();
+
+        //check if user received the letter in the incoming letter.
+        if(Incoming::where('letter_id','=',$id)
+                    ->where('receiver_id','=',$user->id)
+                    ->first()) 
+        {                   
+
         $letter = Letter::where('id','=',$id)->get();
-        $comments = Markview::where('letter_id','=',$id)->get();
-        $letterdetail = Letterdetail::where('id','=',$id)->get();
+        $comments = Marked::where('letter_id','=',$id)->get();
+        $receivers = DB::table('tbl_incomings')
+                            ->where('tbl_incomings.letter_id','=',$id)
+                            ->join('tbl_users','tbl_users.id','=','tbl_incomings.receiver_id')
+                            ->select('tbl_users.email','tbl_incomings.mode_of_receive')            
+                            ->get();
+     //   $letterdetail = Letterdetail::where('id','=',$id)->get();
 
         //get list of receivers and cced.
-       foreach($letterdetail as $ll) 
+       foreach($receivers as $ll) 
        {
-            if($ll->mode == "direct") {
+            if($ll->mode_of_receive == "direct") {
                 if(!empty($recievers)) {
-                    $recievers = $recievers.",".$ll->receiver;
+                    $recievers = $recievers.",".$ll->email;
                 }
                 else {
-                    $recievers = $ll->receiver;
+                    $recievers = $ll->email;
                 }
                
             }
             else//($ll->mode == "cced") {
             {
                 if(!empty($ccedlist)) {
-                $ccedlist = $ccedlist . "," . $ll->receiver;
-                } else { $ccedlist = $ll->receiver;}
-            }
+                $ccedlist = $ccedlist . "," . $ll->email;
+                } else { $ccedlist = $ll->email;}
+           }
 
        }
 
         //get sender email.
-        $senderemail = User::select('email')->where('id',$letter[0]->user_id)->get();
+        $senderemail = User::select('email')->where('id',$letter[0]->created_by)->get();
 
-        //read status.
-
+        
+        //update read status.
         $read = New ReadStatus;
         $read->type = "l";
         $read->reference_id = $id;
         $read->read_by = Auth::id();
         $read->save();
 
+        
+
         return view('pages.letter-detail',compact('id','letter','comments','senderemail','recievers','ccedlist'));
+        }
+        else{
+            return view('home');
+        }
 
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Agency;
 use App\Division;
+use App\Role;
 
 class ImportMaster extends Command
 {
@@ -44,6 +45,7 @@ class ImportMaster extends Command
         //
         $this->importAgencies('agencies',new Agency);
         $this->importDivisions('divisions', new Division);
+        $this->importRoles('roles',new Role);
 
     }
 
@@ -97,6 +99,44 @@ class ImportMaster extends Command
                         'id' => $data[0],
                         'division' => $data[1],
                         'agency_id' => $data[2],
+                    ];
+                    try{
+                        if($model::firstorCreate($data)) {
+                            $i++;
+                        }
+                    }
+                    catch(\Exception $e) {
+                        $this->error('something went wrong... '.$e);
+                        return;
+                    }
+
+                }
+               
+                
+            }
+
+            fclose($handle);
+            $this->line($i." entries successfully added in ".$filename." table");
+        }
+    }
+
+    //function to import roles list.
+    public function importRoles($filename,Model $model) {
+        if(($handle = fopen(public_path() . '/master/'.$filename.'.csv','r')) !== FALSE)
+        {
+            $this->line("Importing ".$filename." tables...");
+            $i=0;
+            while( ($data = fgetcsv($handle,100,',')) !== FALSE)
+            {
+                if(empty($data))
+                {
+                    continue;
+                }
+                else {
+                    
+                    $data = [
+                        'id' => $data[0],
+                        'Role' => $data[1],
                     ];
                     try{
                         if($model::firstorCreate($data)) {

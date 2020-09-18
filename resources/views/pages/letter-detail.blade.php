@@ -170,7 +170,7 @@ function pagesetup() {
   
     if(document.getElementById('statusid').value == "closed") {
       document.getElementById("markid").disabled = true;
-      document.getElementById("closeid").value = "Open";
+      document.getElementById("closeid").value = "open";
     } else {  
       document.getElementById("markid").disabled = false;
      
@@ -179,9 +179,9 @@ function pagesetup() {
 
 
 function closecomment() {
-  if( document.getElementById('closeid').value == "Open")
-  { document.getElementById('inputComment').value = "Opened"; }
-  else { document.getElementById('inputComment').value = "Closed";}
+  if( document.getElementById('closeid').value == "open")
+  { document.getElementById('inputComment').value = "opened"; }
+  else { document.getElementById('inputComment').value = "closed";}
   
 }
 

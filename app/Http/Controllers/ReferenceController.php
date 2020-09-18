@@ -23,7 +23,7 @@ class ReferenceController extends Controller
     {
         //
         $user = Auth::user();
-        $agencies = Agency::where('id',$user->department_id)->get();
+        $agencies = Agency::where('id',$user->agency_id)->get();
            
 
         return view('pages.reference',compact('agencies'));
@@ -38,7 +38,7 @@ class ReferenceController extends Controller
     {
         //
         $user = Auth::user();
-        $agencies = Agency::where('id',$user->department_id)->get();
+        $agencies = Agency::where('id',$user->agency_id)->get();
         return view('pages.reference',compact('agencies'));
     }
 
@@ -56,6 +56,7 @@ class ReferenceController extends Controller
         $reference->reference = $request->reference_no;
         $reference->description = $request->ref_description;
         $reference->agency_id = $request->agency_id;
+        $reference->status="active";
         $reference->created_by = Auth::id();
         $reference->save();
 

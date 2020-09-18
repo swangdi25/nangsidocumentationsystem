@@ -32,12 +32,12 @@
                 <td> <a href= "{{ route('create.show',$letter->id) }}">{{$letter->reference_no}}</a></td>
                 <td>{{$letter->subject}}</td>
                 <td>{{$letter->email}}</td>               
-                <td>{{$letter->created_at->format("d/m/Y")}}</td>
+                <td>{{date('d/m/Y',strtotime($letter->created_at))}}</td>
             </tr>
         @endforeach
     </tbody>
     </table>
-        {{ $letters->links() }}
+       
     </div>
  </div>
 </div>
