@@ -7,7 +7,7 @@
       <li class="active">
         &nbsp;&nbsp;<a href="#homeSubmenu" data-toggle="collapse" aria-expended="false" class="dropdown-toggle text-info"><i class="fas fa-mail-bulk"></i>&nbsp;Letters</a>
           <ul class="show menu" id="homeSubmenu" style="list-style-type: none;">
-                <li><a href="/receive" class="text-secondary"><i class="fas fa-envelope-open-text"></i>&nbsp;Receive</a></li>
+                <li><a href="/receive" class="text-secondary"><i class="fas fa-envelope-open-text"></i>&nbsp;Upload</a></li>
                 <li><a href="{{ route('create.create')}}" class="text-secondary"><i class="far fa-envelope"></i>&nbsp;Dispatch</a></li>
                 <li><a href="{{ route('notify.create')}}" class="text-secondary"><i class="fas fa-bell"></i>&nbsp;Notify</a></li>
                 <li><a href="/showletters" class="text-secondary"><i class="fas fa-star"></i>&nbsp;Important</a> &nbsp; </li>
@@ -48,4 +48,3 @@
   </nav>
 
   @endguest
-
