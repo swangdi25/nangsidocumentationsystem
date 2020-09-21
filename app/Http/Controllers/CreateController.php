@@ -98,7 +98,7 @@ class CreateController extends Controller
             
         }
              
-        return view('pages.dispatch',['dipatchno' => $dno],compact('references'));
+        return view('pages.dispatch',['dipatchno' => $dno,'agencyid' => $user->agency_id],compact('references'));
     }
 
     /**
