@@ -108,4 +108,16 @@ class ReferenceController extends Controller
     {
         //
     }
+    
+    /**
+     * 
+     * List references.
+     */
+
+     public function list() {
+
+        $user = Auth::user();
+        $refList = Reference::where('agency_id','=',$user->agency_id)->get();
+        return view('pages.referencelist',compact('refList'));
+     }
 }

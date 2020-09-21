@@ -45,7 +45,10 @@
                 <button type="submit" class="btn btn-secondary">Save</button> 
               </div> 
             </div>
-          </form>
+          </form>   
+          <div class="row">
+            &nbsp;&nbsp;<a href="{{ route('reference.list') }}">Reference List</a>
+           </div>     
       </div>
   </div>
 </div>

@@ -41,6 +41,8 @@ Route::resource('create','CreateController');
 Route::resource('marked','MarkController');
 
 Route::resource('reference','ReferenceController');
+Route::get('/referencelist','ReferenceController@list')->name('reference.list');
+
 Route::resource('notify','NotifyController');
 
 Route::resource('profile','UserProfile');
