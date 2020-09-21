@@ -267,7 +267,8 @@ class CreateController extends Controller
 
         $letter =  DB::table('tbl_letters')                
                         ->join('tbl_users','tbl_letters.created_by','=','tbl_users.id')
-                        ->select('tbl_letters.id','tbl_letters.reference_no','tbl_letters.subject','tbl_letters.address','tbl_letters.place','tbl_letters.file_attachment_link','tbl_letters.place','tbl_users.email','tbl_letters.status')
+                        ->select('tbl_letters.id','tbl_letters.reference_no','tbl_letters.subject','tbl_letters.address','tbl_letters.place',
+                        'tbl_letters.file_attachment_link','tbl_letters.place','tbl_users.email','tbl_letters.status','tbl_letters.filename')
                         ->where('tbl_letters.id','=', $id)                    
                         ->first();
 

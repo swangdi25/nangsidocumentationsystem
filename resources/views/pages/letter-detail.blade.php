@@ -116,7 +116,22 @@
                 <button id="markid" type="submit" class="btn btn-primary">Mark</button> &nbsp;&nbsp; <input id="closeid" type="submit" class="btn btn-primary" onclick="closecomment();" value="Close"/>
                 </div>             
             </div>  
-        </form>            
+        </form> 
+        <!-- form to send email -->
+        <form method="POST" action="/sendemail" enctype="multipart/form-data" accept-charset="UTF-8">
+            @csrf
+            <div class="form-group row">
+              <label class="col-sm-2"></label>
+                <div class="col-sm-6">
+                <input type="hidden" class="form-control" name="emailto" value="{{$recievers}}">
+                <input type="hidden" class="form-control" name="lsubject" value="{{$letter->subject}}">
+                <input type="hidden" name="filelink" value="{{ asset('storage/'.$letter->file_attachment_link)}}">
+                <input type="hidden" name="filename" value="{{$letter->filename}}">
+                <button type="submit" class="btn btn-secondary">Send email</button>
+                </div>
+            </div>
+        </form>
+        <!--end of form to send email -->           
     </div>  
   </div>
 </div>

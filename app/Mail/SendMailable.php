@@ -10,17 +10,17 @@ use Illuminate\Queue\SerializesModels;
 class SendMailable extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user;
+    public $details;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($details)
     {
         //
-        $this->user = $user;
+        $this->details = $details;
     }
 
     /**
@@ -30,7 +30,7 @@ class SendMailable extends Mailable
      */
     public function build()
     {
-        return $this->subject("Verification of User Registration")            
-                    ->view("emails.mail");
+        return $this->subject($this->details['subject'])
+                    ->view('emails.mail',compact('details'));
     }
 }

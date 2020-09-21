@@ -75,7 +75,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'nds@mohca.gov.bt'),
-        'name' => env('MAIL_FROM_NAME', 'Nangsi Documentation System'),
+        'name' => env('MAIL_FROM_NAME', "Nangsi Documentation System"),
     ],
 
     /*

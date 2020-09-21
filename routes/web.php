@@ -77,7 +77,10 @@ Route::get('/contactlist',function() {
 
 //Route::get('/send/email', 'MailController@sendmail');
 
-//Route::get('send-mail','MailController@sendmail');
+Route::post('sentmail','MailController@sendmail');
+// Route::get('sentmail','MailController@compose');
+Route::post('sendemail','MailController@compose');
+
 Route::get('/home', 'CreateController@index');
 
 
