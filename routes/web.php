@@ -41,6 +41,8 @@ Route::resource('create','CreateController');
 Route::resource('marked','MarkController');
 
 Route::resource('reference','ReferenceController');
+Route::get('/referencelist','ReferenceController@list')->name('reference.list');
+
 Route::resource('notify','NotifyController');
 
 Route::resource('profile','UserProfile');
@@ -86,3 +88,5 @@ Route::get('/home', 'CreateController@index');
 Route::get('/roles','MasterDataController@getRoles');
 //...get divisions.
 Route::get('/get-divisions','MasterDataController@getDivisions');
+//...get reference_no of last transactions.
+Route::get('/get-dispatchnumber','MasterDataController@getDispatchNumbers');

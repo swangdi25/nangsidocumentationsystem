@@ -26,4 +26,17 @@ class MasterDataController extends Controller
         return response()->json($divisions);
     }
 
+    //return dispatch numbers.
+    public static function getDispatchNumbers(Request $request) {
+        $dispatched = DB::table('tbl_letters')
+                        ->where('agency_id','=',$request->agency_id)
+                        ->where('type','=','dispatch')
+                        ->select('reference_no','subject')
+                        ->latest()
+                        ->limit('5')
+                        ->get();
+
+        return response()->json($dispatched);
+    }
+
 }

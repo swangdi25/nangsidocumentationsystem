@@ -16,6 +16,7 @@ class CreateLetterTable extends Migration
         Schema::create('tbl_letters', function (Blueprint $table) {
             $table->id();
             $table->string('reference_no',20);
+            $table->foreignId('agency_id')->reference('id')->on('tbl_agencies');
             $table->string('type',10);
             $table->string('subject',100);
             $table->string('address');
