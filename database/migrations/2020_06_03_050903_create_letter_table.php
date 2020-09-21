@@ -20,7 +20,7 @@ class CreateLetterTable extends Migration
             $table->string('type',10);
             $table->string('subject',100);
             $table->string('address');
-            $table->string('place');
+            $table->string('place')->nullable();
             $table->string('filename',50);
             $table->string('file_attachment_link');
             $table->boolean('important')->default(0);
