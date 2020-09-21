@@ -88,3 +88,5 @@ Route::get('/home', 'CreateController@index');
 Route::get('/roles','MasterDataController@getRoles');
 //...get divisions.
 Route::get('/get-divisions','MasterDataController@getDivisions');
+//...get reference_no of last transactions.
+Route::get('/get-dispatchnumber','MasterDataController@getDispatchNumbers');
